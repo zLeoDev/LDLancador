@@ -28,16 +28,27 @@ public class Main extends PluginBase implements Listener{
 		Item it = p.getInventory().getItemInHand();
 		if(i.getId() == 401 && it.getId() ==  401 && i.getCustomName().equals("§aLançador") || it.getCustomName().equals("§aLançador")) {
 			//if(it.hasEnchantments()) {
+			if(!voando.contains(p)) {
 				e.setCancelled();
 				p.setCheckMovement(false);
 				Item item = Item.get(401, 0, 1);
 				item.setCustomName("§aLançador");
 				p.getInventory().removeItem(item);
-				Vector3 vec = new Vector3(p.getMotion().getX(), p.getMotion().getY() + 2.2D, p.getMotion().getZ());
+				Vector3 vec = new Vector3(p.getMotion().getX(), p.getMotion().getY() + 1.7D, p.getMotion().getZ());
 				p.setMotion(vec);
 				voando.add(p);
-				p.getLevel().addSound(vec, Sound.RANDOM_LEVELUP);
-			//}
+				p.getLevel().addSound(p.getLocation(), Sound.RANDOM_LEVELUP);
+				//}
+			} else {
+				Vector3 vec1 = new Vector3(p.getMotion().getX(), 0.0D, p.getMotion().getZ());
+				p.setMotion(vec1);
+				Vector3 vec = new Vector3(p.getMotion().getX(), p.getMotion().getY() + 1.7D, p.getMotion().getZ());
+				p.setMotion(vec);
+				Item item = Item.get(401, 0, 1);
+				item.setCustomName("§aLançador");
+				p.getLevel().addSound(p.getLocation(), Sound.RANDOM_LEVELUP);
+				p.getInventory().removeItem(item);
+			}
 		}
 	}
 	@EventHandler
@@ -49,6 +60,8 @@ public class Main extends PluginBase implements Listener{
 				if(voando.contains(p)) {
 				e.setCancelled();
 				voando.remove(p);
+				Vector3 vec = new Vector3(p.getMotion().getX(), 0.0D, p.getMotion().getZ());
+				p.setMotion(vec);
 				}
 			}
 		}
@@ -58,9 +71,9 @@ public class Main extends PluginBase implements Listener{
 		item.setCustomName("§aLançador");
 		p.getInventory().addItem(item);
 	}
-	//@EventHandler
-	//public void onSneak(PlayerToggleSneakEvent e) {
+	@EventHandler
+	public void onSneak(PlayerToggleSneakEvent e) {
 	//	//aí vocês façam um comando para dar lançador//
-	//	getLan(e.getPlayer());
-	//}
+		//getLan(e.getPlayer());
+	}
 }
