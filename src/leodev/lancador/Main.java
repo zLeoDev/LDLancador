@@ -7,7 +7,6 @@ import cn.nukkit.entity.Entity;
 import cn.nukkit.event.EventHandler;
 import cn.nukkit.event.Listener;
 import cn.nukkit.event.entity.EntityDamageEvent;
-import cn.nukkit.event.entity.EntityDamageEvent.DamageCause;
 import cn.nukkit.event.player.PlayerInteractEvent;
 import cn.nukkit.event.player.PlayerToggleSneakEvent;
 import cn.nukkit.item.Item;
@@ -19,6 +18,7 @@ public class Main extends PluginBase implements Listener{
 	ArrayList<Player> voando = new ArrayList<>();
 	public void onEnable() {
 		getServer().getPluginManager().registerEvents(this, this);
+		getServer().getCommandMap().register("lancador", new Comandos(this));
 	}
 	
 	@EventHandler
@@ -66,8 +66,8 @@ public class Main extends PluginBase implements Listener{
 			}
 		}
 	}
-	public void getLan(Player p) {
-		Item item = Item.get(401, 0, 1);
+	public void getLan(Player p, int quantidade) {
+		Item item = Item.get(401, 0,quantidade);
 		item.setCustomName("§aLançador");
 		p.getInventory().addItem(item);
 	}
