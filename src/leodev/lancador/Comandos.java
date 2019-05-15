@@ -22,11 +22,15 @@ public class Comandos extends Command{
 				if(loader.getServer().getPlayer(jogador) == null) {
 					sender.sendMessage("§cEste jogador não existe ou não está online!");
 				} else {
+					if(sender.hasPermission("lancador.staff")) {
 					Player player = loader.getServer().getPlayer(jogador);
 					int quantidades = Integer.parseInt(quantidade);
 					loader.getLan(player, quantidades);
 					sender.sendMessage("§aVocê deu §f" + quantidade + " §alançadores para o jogador §f" + player.getName() + "§a." );
 					player.sendMessage("§aVocê recebeu §f" + quantidade + " §alançadores");
+					} else {
+						sender.sendMessage("§cVocê não tem permissão para usar este comando!");
+					}
 				}
 			}
 		}
