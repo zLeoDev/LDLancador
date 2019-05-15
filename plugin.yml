@@ -1,5 +1,7 @@
 name: LDLancador
 main: leodev.lancador.Main
 api: 1.0.0
-version: 0.5
+version: 0.6
 description: Plugin de lancador feito para factions.
+commands:
+   lancador:
